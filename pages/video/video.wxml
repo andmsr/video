@@ -1,0 +1,56 @@
+<!--pages/video/video.wxml-->
+<view class="movie">
+     <video id="myVideo" src="{{video_url}}" autoplay="true" ></video> 
+
+</view>
+<view class='movie-scroll'>
+  <!-- 内容 -->
+  <view class='movie-info {{is_show_info?"": "hidden"}}'>
+    <view class='movie-title'>{{name}}<image bindtap='collectionFun' src='{{cImg}}'></image></view>
+    <view class='movie-cate'>地区：{{movie.info.area}}</view>
+    <view class='movie-cate'>类型：{{movie.info.cate}}</view>
+    <view class='movie-start'>主演：{{movie.start2}}</view>
+    <view class='movie-start'>状态：{{movie.info.status}}</view>
+    <view class='movie-start'>语言：{{movie.info.lang}}</view>
+    <view class='movie-start'>时间：{{movie.info.time}}</view>
+    <view class='movie-info'>{{movie.info.info}}</view>
+  </view>
+  <!-- 内容 -->
+  <!-- 集数 -->
+  <view class='movie-num'>
+    <view class='movie-sel'>选集</view>
+    <view wx:for="{{movie.video}}" wx:for-index="vd" wx:for-item="itemV" >
+      <view data-mark="{{itemV.href}}" data-id='{{vd}}' class='movie-play {{_select == vd?"movie-play-select":"movie-play-select-no"}}' bindtap='changePlay'>{{itemV.name}}</view>
+    </view>
+  </view>
+  <!-- 迅雷下载 -->
+  <view class='movie-thunder {{is_show_thunder?"": "hidden"}}' >
+    <view class='movie-thunder-title'>迅雷链接</view>
+    <view  wx:for="{{movie.thunder}}" wx:for-index="th" wx:for-item="itemTh">
+      <view class='movie-thunder-list'>
+        <view class='thunder-num'>{{itemTh.name}}：</view>
+        <view class='thunder-copy'><input type='text' maxlength='-1' value='{{itemTh.url}}'/></view>
+        <view class='thunder-btn'>
+          <view data-copy="{{itemTh.url}}" bindtap='copyThunder'>复制</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 迅雷下载 -->
+  <!-- 集数 -->
+  <!-- 猜你喜欢 -->
+  <view class='bottom-view'>
+      <view class='is-like-title'>猜你喜欢</view>
+      <view class='is-like-view'>
+        <view class='is-like-list' wx:for="{{is_like}}" wx:for-index="like" wx:for-item="itemLike">
+          <navigator url="../video/video?mark={{itemLike.mark}}&title={{itemLike.name}}">
+            <image src='{{itemLike.img}}' data-href="{{itemLike.mark}}"></image>
+          </navigator>
+          <view class='is-like-name'>{{itemLike.name}}</view>
+          <view class='is-like-name'>播放 {{itemLike.r_num}}次</view>
+        </view>
+      </view>
+      <view class='is-like-list-bottom'>----你已经触碰到底线----</view>
+  </view>
+  <!-- 猜你喜欢 -->
+</view>

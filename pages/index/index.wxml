@@ -1,0 +1,59 @@
+
+<!--index.wxml-->
+<view class='bottom-view {{showSlide ? "" : ""}}'>
+  <view bindtap="tap_ch" class='bottom-view-img'>
+    <image  src='../image/cate.png'></image>
+  </view> 
+  <view data-type=""        class='bottom-view-list {{!showColor ? "left-color" : ""}}' bindtap='cateInfo'>全部</view>
+  <view data-type="movie"   class='bottom-view-list {{showColor == "movie" ? "left-color" : ""}}' bindtap='cateInfo'>电影</view>
+  <view data-type="tv"      class='bottom-view-list {{showColor == "tv" ? "left-color" : ""}}' bindtap='cateInfo'>电视剧</view>
+  <view data-type="dongman" class='bottom-view-list {{showColor == "dongman" ? "left-color" : ""}}' bindtap='cateInfo'>动漫</view>
+  <view data-type="zongyi"  class='bottom-view-list {{showColor == "zongyi" ? "left-color" : ""}}' bindtap='cateInfo'>综艺</view>
+  <view data-type="wangluodianying"  class='bottom-view-list {{showColor == "wangluodianying" ? "left-color" : ""}}' bindtap='cateInfo'>网络电影</view>
+  <view data-type="dongzuo"  class='bottom-view-list {{showColor == "dongzuo" ? "left-color" : ""}}' bindtap='cateInfo'>动作片</view>
+  <view data-type="kehuan"  class='bottom-view-list {{showColor == "kehuan" ? "left-color" : ""}}' bindtap='cateInfo'>科幻</view>
+  <view data-type="juqingpian"  class='bottom-view-list {{showColor == "juqingpian" ? "left-color" : ""}}' bindtap='cateInfo'>剧情片</view>
+  <view data-type="xiju"  class='bottom-view-list {{showColor == "xiju" ? "left-color" : ""}}' bindtap='cateInfo'>喜剧</view>
+  <view data-type="aiqing"  class='bottom-view-list {{showColor == "aiqing" ? "left-color" : ""}}' bindtap='cateInfo'>爱情</view>
+  <view data-type="daluju"  class='bottom-view-list {{showColor == "daluju" ? "left-color" : ""}}' bindtap='cateInfo'>大陆剧</view>
+  <view data-type="gangju"  class='bottom-view-list {{showColor == "gangju" ? "left-color" : ""}}' bindtap='cateInfo'>港剧</view>
+  <view data-type="hanju"  class='bottom-view-list {{showColor == "hanju" ? "left-color" : ""}}' bindtap='cateInfo'>韩剧</view>
+  <view data-type="meiju"  class='bottom-view-list {{showColor == "meiju" ? "left-color" : ""}}' bindtap='cateInfo'>美剧</view>
+  <view data-type="mycollect"  class='bottom-view-list {{showColor == "mycollect" ? "left-color" : ""}}' bindtap='cateInfo'>我的收藏</view>
+</view>
+ <view class="container top-view{{showSlide ? '' : ''}} {{open ? 'c-state1' : ''}}"> 
+<!-- 头部搜索 -->
+ <view class='top-search' >
+  <view class='top-search-cate {{imgShow ? "" : "hidden"}}'>
+    <image bindtap="tap_ch" src='../image/cate.png'></image>
+  </view> 
+  <view class='top-search-input'>
+    <input name='searchInput' bindfocus='clearData' bindblur="getKeyword" bindconfirm="getKeyword" placeholder="站内搜索"/>
+  </view>
+  <navigator url="../search/search"> 
+    <view class='top-search-btn'>站外</view>
+  </navigator> 
+
+ </view> 
+<!-- 头部搜索 -->
+<!-- 内容列表 -->
+  <scroll-view scroll-y bindscrolltolower="refreshFun" bindscrolltoupper="onPullDownRefresh" class="infolist" >
+    <view wx:for="{{movie}}" wx:for-index="mo" wx:for-item="itemMo" class="infolist-list">
+        <navigator url="../video/video?mark={{itemMo.mark}}&title={{itemMo.name}}">
+          <image src='{{itemMo.img}}' mode="aspectFill" data-href="{{itemMo.mark}}"></image>
+        </navigator>
+        <view class='movie-name cc3'>{{itemMo.name}}</view>
+        <view class='movie-name cc6 bt-margin'>播放 {{itemMo.r_num}}次</view>
+    </view>  
+  </scroll-view> 
+<!-- 内容列表 -->
+<!-- 暂无资源 -->
+<view class='no-movie {{noMovie ? "hidden" : ""}}'>
+  <view class='no-movie-img'><image src="../image/nodata.png"></image></view>
+  <view class='no-movie-title'>暂无资源</view>
+</view>
+<!-- 暂无资源 -->
+<!-- 遮罩层 -->
+<view class='mask-layer {{markLayer ? "hidden" : ""}}' bindtap="tap_ch{{markLayer ? '2' :''}}" ></view>
+<!-- 遮罩层 -->
+ </view> 

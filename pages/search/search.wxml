@@ -1,0 +1,58 @@
+<!--pages/search/search.wxml-->
+<!-- 搜索框 -->
+<view class='search-input-box'>
+  <view class='search-input'>
+    <input name='searchInput' bindfocus='clearData' bindblur="getKeyword" bindconfirm="getKeyword" placeholder="输入要搜索的影片" />
+  </view>
+  <view class='top-search-btn' bindtap='scoreList'>排行</view>
+</view>
+<!-- 搜索框 -->
+<!-- 排行榜 -->
+<view class='score-list {{is_show?"hidden":""}}'>
+  <view class='score-info'>
+    <view class='score-info-list' wx:for="{{score}}" wx:for-index="scid" wx:for-item="scit">
+    <navigator url="../video/video?mark={{scit.href}}&title={{scit.name}}">    
+      <view class='score-left'>
+      <image src='{{scit.img}}'></image>
+      </view>
+      <view class='score-right'>
+        <view class='score-name '>{{scit.name}}</view>
+        <view class='score-resolution'>{{scit.type}}</view>
+        <view class='score-content f14 fc3'>主演：{{scit.starting}}</view>
+        <view class='score-content f14 fc3'>评分：{{scit.score}}</view>
+        <view class='score-content f14 fc3'>观看：{{scit.look}}</view>
+        <view class='score-content f14 fc3'>排名：{{scit.rank}}</view>
+      </view>
+      <view class='line-style'></view>
+    </navigator>
+    </view>
+  </view>
+</view>
+<!-- 排行榜 -->
+<!-- 列表 -->
+<view class='search-list {{is_show?"":"hidden"}}'>
+  <view class="infolist">
+    <view wx:for="{{movie}}" wx:for-index="mo" wx:for-item="itemMo" class="infolist-list">
+        <navigator url="../video/video?mark={{itemMo.video_url}}&title={{itemMo.name}}">
+          <view class='infolist-img'>
+            <image src='{{itemMo.image_url}}' data-href="{{itemMo.video_url}}"></image>
+          </view>
+          <view class='infolist-content'>
+            <view class='infolist-content-name'>{{itemMo.name}}</view>
+            <view class='infolist-content-resolution'>{{itemMo.type}}</view>
+            <view class='infolist-content-starting f14 fc3'><view class='f20'>主演：</view><view class='f80'>{{itemMo.starting}}</view></view>
+            <view class='infolist-content-direc f14 fc3'><view class='f20'>导演：</view><view class='f80'>{{itemMo.direc}}</view></view>
+            <view class='infolist-content-area f14 fc3'><view class='f20'>地区：</view><view class='f80'>{{itemMo.area}}</view></view>
+            <view class='infolist-content-year f14 fc3'><view class='f20'>年份：</view><view class='f80'>{{itemMo.year}}</view></view> 
+          </view>
+        </navigator>
+        <view class='line-style'></view>
+    </view>  
+  </view>
+</view>
+<!-- 列表 -->
+<!-- 回顶部 -->
+<view class='float-btn-box hidden'>
+  <image src='../image/up.png' bindtap='goTop'></image>
+</view>
+<!-- 回顶部 -->
